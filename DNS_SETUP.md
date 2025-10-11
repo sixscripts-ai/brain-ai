@@ -26,13 +26,18 @@ Look for one of these sections in your control panel:
 
 You need to create the following DNS records:
 
-#### Option A: CNAME Record (Recommended for subdomains)
+#### Option A: CNAME Record (For www subdomain only)
 ```
 Type: CNAME
 Name: www
 Value: sixscripts-ai.github.io
 TTL: 3600 (or Auto)
 ```
+
+**Important Note:** 
+- The CNAME record should only be used for the www subdomain
+- For the apex domain (sixscripts-ai.com), you MUST use A records (Option B)
+- GitHub Pages will automatically serve your site from the repository path
 
 #### Option B: A Records (For apex domain)
 ```
@@ -136,11 +141,13 @@ Try accessing your site at:
 
 #### "Domain's DNS record could not be retrieved"
 - **Cause**: DNS records not properly configured
-- **Solution**: Double-check your A records match GitHub's IP addresses
+- **Solution**: Double-check your A records match GitHub's IP addresses exactly
 
 #### "Domain does not resolve to the GitHub Pages server"
 - **Cause**: Incorrect CNAME or A record values
-- **Solution**: Verify the record values match exactly
+- **Solution**: 
+  - For apex domain: Use A records pointing to GitHub's IPs
+  - For www subdomain: Use CNAME pointing to `sixscripts-ai.github.io` (NOT the full repository path)
 
 #### "Certificate provisioning failed"
 - **Cause**: DNS not fully propagated or CAA records blocking
@@ -149,6 +156,14 @@ Try accessing your site at:
 #### "Page not found" or 404 errors
 - **Cause**: CNAME file missing or incorrect
 - **Solution**: Ensure CNAME file contains only `sixscripts-ai.com`
+
+#### "GitHub cannot verify your domain"
+- **Cause**: Incorrect DNS configuration or propagation issues
+- **Solution**: 
+  1. Remove any CNAME records for the apex domain (@)
+  2. Ensure A records point to all 4 GitHub IP addresses
+  3. Wait for DNS propagation (up to 24 hours)
+  4. Try removing and re-adding the custom domain in GitHub Pages settings
 
 ### Advanced Troubleshooting
 
