@@ -1,0 +1,37 @@
+**InnerCircleTrader Core Concepts – Structured Dataset**
+
+| Concept | Definition | Key Characteristics | Typical Confirmation | Trading Rule | Common Mistake | Related Concepts |
+|---------|------------|----------------------|----------------------|--------------|----------------|------------------|
+| **Order Block (OB)** | Institutional price zone of last opposing candle before a directional move | • Last candle before move • Zone of heavy institutional order flow | OB in line with HTF bias | Enter at OB after sweep | Mistaking any support/resistance as OB | Liquidity Sweep, FVG |
+| **Fair Value Gap (FVG)** | Price imbalance/inefficiency that seeks rebalancing | • Three candles with gap • No trading in gap area | FVG aligned with OB | Target retracement 62‑79% | Over‑trading gaps | OB, Liquidity Void |
+| **Liquidity Pool** | Cluster of stop‑losses or large orders institutions target | • High volume nodes • Often near prior swing highs/lows | Liquidity pool near OB or FVG | Place stop beyond pool | Ignoring pool placement | Order Block, Sweep |
+| **Premium/Discount (PD) Array** | Value‑based pricing zones (0‑30% discount, 70‑100% premium) | • Defines ideal entry zones | Entry within correct PD range | Use PD for risk sizing | Entering outside PD | OB, FVG |
+| **Market Structure** | Higher highs/lows, BOS, CHoCH | • Determines bias | Break of structure confirms bias | Align trades with new structure | Misreading structure | AMD, PO3 |
+| **Kill Zone** | High‑probability trading windows (London, NY, Asian) | • Specific time windows | Trade only in kill zone | Wait for kill zone | Trading outside window | Macro Times |
+| **Silver Bullet** | 20‑minute precision window for high‑prob trades | • Specific minutes in session | Align entry with silver bullet | Tight timing | Mis‑timed entry | Kill Zone |
+| **AMD Model** | Accumulation → Manipulation → Distribution | • Three phases | Identify phase before entry | Trade within phase | Ignoring phase | PO3, Judas Swing |
+| **PO3 Model** | Consolidation → Manipulation → Trend | • Repeats each session | Look for consolidation break | Entry on trend | Overlooking manipulation | AMD |
+| **Judas Swing** | False move in first 30‑60 min of session to trap retail | • Early session reversal | Wait for second swing | Avoid early trade | Jumping in too early | PO3 |
+| **Breaker Block** | Failed OB that changes polarity | • OB that fails to hold | Watch for reversal after failure | Exit on failure | Treating as normal OB | OB |
+| **Mitigation Block** | Partially filled OB that still matters | • Partial fill • Still a zone | Keep as support/resistance | Use for stop placement | Ignoring mitigation | OB |
+| **Propulsion Block** | Last OB before explosive move | • Highest OB before trend | Enter on break | Use for breakout | Missing propulsion | OB |
+| **Rejection Block** | OB with strong initial rejection | • Sharp price rejection | Use as reversal | Enter after rejection | Misreading rejection | OB |
+| **Swing Failure Pattern (SFP)** | Brief violation that fails | • Small move into next zone then reverse | Look for SFP after OB/FVG | Trade reversal | Over‑confident SFP | OB, FVG |
+| **Liquidity Sweep** | False break to trigger stops before reversal | • Sharp move then reversal | Enter after sweep | Use for entry | Ignoring sweep | Liquidity Pool |
+| **Smart Money Concepts (SMC)** | Trading with institutional flow, not retail | • Focus on OB, FVG, sweeps | Apply all concepts | Follow SMC methodology | Trading retail | All above |
+| **Institutional Order Flow** | Reading large order footprints via OBs, FVGs, sweeps | • Footprint data • Volume spikes | Confirm with OB/FVG | Enter on institutional signals | Misreading flow | SMC |
+| **Displacement** | Strong impulsive move indicating institutional activity | • Sudden price move | Use as trend confirmation | Enter on displacement | Missing displacement | OB |
+| **Liquidity Void** | Area of no trading activity (large gaps) | • Gaps on chart | Treat as potential reversal | Place stop beyond void | Ignoring void | FVG |
+| **Volume Imbalance** | Disproportionate buy/sell volume creating inefficiency | • Large buy or sell volume | Look for imbalance with OB/FVG | Use for entry | Ignoring imbalance | FVG, OB |
+
+**How to Use This Dataset**
+
+1. **Identify HTF bias** – look at Daily/4H.  
+2. **Find OB/FVG** – check 1H/15m aligned with bias.  
+3. **Confirm liquidity sweep or pool** – look for false break.  
+4. **Check PD array** – ensure entry zone is correct.  
+5. **Wait for kill/silver bullet** – align timing.  
+6. **Enter** – with stop beyond the next OB/FVG or sweep.  
+7. **Set TP** – 62‑79% retracement or next liquidity pool.  
+
+This table should serve as a quick reference when analyzing charts and constructing high‑probability setups.

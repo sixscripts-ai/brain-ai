@@ -1,0 +1,32 @@
+{
+  "name": "ict-knowledge-system-examples",
+  "version": "1.0.0",
+  "description": "Example scripts for ICT AI Knowledge System integration",
+  "main": "basic-usage.js",
+  "scripts": {
+    "basic": "node basic-usage.js",
+    "batch": "node basic-usage.js --batch",
+    "advanced": "node basic-usage.js --advanced",
+    "test-connection": "node test-connection.js",
+    "demo": "node demo-workflow.js",
+    "benchmark": "node benchmark.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "ws": "^8.14.0",
+    "socket.io-client": "^4.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/ws": "^8.5.0"
+  },
+  "keywords": [
+    "ict",
+    "trading",
+    "ai",
+    "knowledge-system",
+    "examples"
+  ],
+  "author": "ICT AI Knowledge System",
+  "license": "MIT"
+}

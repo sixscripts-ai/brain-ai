@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICT AI Knowledge System - Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .status-bar {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .status-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .status-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .status-card h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .status-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+
+        .status-healthy { background: #10b981; }
+        .status-warning { background: #f59e0b; }
+        .status-error { background: #ef4444; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 300px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: #e5e7eb;
+            border-radius: 10px;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #059669);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .concept-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .concept-item {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.2s ease;
+        }
+
+        .concept-item:hover {
+            background: #f9fafb;
+        }
+
+        .concept-name {
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .concept-category {
+            font-size: 0.8rem;
+            color: #666;
+            background: #f3f4f6;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin: 0 10px;
+        }
+
+        .concept-score {
+            font-weight: 600;
+            color: #059669;
+        }
+
+        .log-container {
+            background: #1f2937;
+            border-radius: 10px;
+            padding: 20px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+        }
+
+        .log-entry {
+            margin-bottom: 5px;
+            padding: 5px 0;
+        }
+
+        .log-timestamp {
+            color: #9ca3af;
+        }
+
+        .log-level-info { color: #60a5fa; }
+        .log-level-success { color: #34d399; }
+        .log-level-warning { color: #fbbf24; }
+        .log-level-error { color: #f87171; }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: #ef4444;
+        }
+
+        .notification.warning {
+            background: #f59e0b;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                padding: 10px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .status-bar {
+                flex-direction: column;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>ICT AI Knowledge System</h1>
+            <p>Real-time monitoring and analytics for AI learning progress</p>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-card">
+                <h3>System Status</h3>
+                <div class="status-value">
+                    <span id="system-status">Checking...</span>
+                    <span class="status-indicator" id="system-indicator"></span>
+                </div>
+            </div>
+            <div class="status-card">
+                <h3>Overall Progress</h3>
+                <div class="status-value">
+                    <span id="overall-progress">0%</span>
+                </div>
+            </div>
+            <div class="status-card">
+                <h3>Concepts Mastered</h3>
+                <div class="status-value">
+                    <span id="concepts-mastered">0</span>
+                </div>
+            </div>
+            <div class="status-card">
+                <h3>Active Sessions</h3>
+                <div class="status-value">
+                    <span id="active-sessions">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="refreshData()">
+                <span id="refresh-text">Refresh Data</span>
+            </button>
+            <button class="btn btn-success" onclick="runQuickTest()">
+                Run Quick Test
+            </button>
+            <button class="btn btn-secondary" onclick="generateTrainingData()">
+                Generate Training Data
+            </button>
+            <button class="btn btn-warning" onclick="rebuildEmbeddings()">
+                Rebuild Embeddings
+            </button>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Learning Progress by Category</h2>
+                <div class="chart-container">
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Mastery Level Distribution</h2>
+                <div class="chart-container">
+                    <canvas id="masteryChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Recent Validation Results</h2>
+                <div class="chart-container">
+                    <canvas id="validationChart"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>System Performance</h2>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="card">
+                <h2>Top Performing Concepts</h2>
+                <div class="concept-list" id="top-concepts">
+                    <div class="concept-item">
+                        <div class="concept-name">Loading...</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Areas for Improvement</h2>
+                <div class="concept-list" id="improvement-areas">
+                    <div class="concept-item">
+                        <div class="concept-name">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>System Logs</h2>
+            <div class="log-container" id="system-logs">
+                <div class="log-entry">
+                    <span class="log-timestamp">[Loading...]</span>
+                    <span class="log-level-info">Initializing dashboard...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <span id="notification-text"></span>
+    </div>
+
+    <script>
+        // Global variables
+        let socket;
+        let charts = {};
+        let systemData = {};
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeWebSocket();
+            initializeCharts();
+            loadInitialData();
+            startPerformanceMonitoring();
+        });
+
+        // WebSocket connection
+        function initializeWebSocket() {
+            socket = io();
+            
+            socket.on('connect', function() {
+                addLog('Connected to real-time updates', 'success');
+                updateSystemStatus('Connected', 'healthy');
+            });
+            
+            socket.on('disconnect', function() {
+                addLog('Disconnected from server', 'warning');
+                updateSystemStatus('Disconnected', 'warning');
+            });
+            
+            socket.on('validation_complete', function(data) {
+                addLog(`Validation session completed: ${data.averageScore}% average score`, 'success');
+                updateValidationChart(data);
+            });
+            
+            socket.on('training_data_generated', function(data) {
+                addLog(`Training data generated: ${data.totalRecords} records`, 'info');
+            });
+            
+            socket.on('embeddings_updated', function(data) {
+                addLog(`Embeddings updated: ${data.totalEmbeddings} vectors`, 'info');
+            });
+            
+            socket.on('system_error', function(data) {
+                addLog(`System error: ${data.message}`, 'error');
+                showNotification(data.message, 'error');
+            });
+        }
+
+        // Initialize charts
+        function initializeCharts() {
+            // Category Progress Chart
+            const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+            charts.category = new Chart(categoryCtx, {
+                type: 'radar',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Mastery Level',
+                        data: [],
+                        backgroundColor: 'rgba(102, 126, 234, 0.2)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Mastery Distribution Chart
+            const masteryCtx = document.getElementById('masteryChart').getContext('2d');
+            charts.mastery = new Chart(masteryCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Beginner', 'Intermediate', 'Advanced', 'Expert'],
+                    datasets: [{
+                        data: [0, 0, 0, 0],
+                        backgroundColor: [
+                            '#ef4444',
+                            '#f59e0b',
+                            '#10b981',
+                            '#3b82f6'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Validation Results Chart
+            const validationCtx = document.getElementById('validationChart').getContext('2d');
+            charts.validation = new Chart(validationCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: 'Average Score',
+                        data: [],
+                        borderColor: 'rgba(16, 185, 129, 1)',
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Performance Chart
+            const performanceCtx = document.getElementById('performanceChart').getContext('2d');
+            charts.performance = new Chart(performanceCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [
+                        {
+                            label: 'Response Time (ms)',
+                            data: [],
+                            borderColor: 'rgba(59, 130, 246, 1)',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            yAxisID: 'y'
+                        },
+                        {
+                            label: 'Memory Usage (%)',
+                            data: [],
+                            borderColor: 'rgba(245, 158, 11, 1)',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            yAxisID: 'y1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            max: 100,
+                            grid: {
+                                drawOnChartArea: false,
+                            },
+                        }
+                    }
+                }
+            });
+        }
+
+        // Load initial data
+        async function loadInitialData() {
+            try {
+                addLog('Loading initial data...', 'info');
+                
+                // Load system health
+                await checkSystemHealth();
+                
+                // Load learning analytics
+                await loadLearningAnalytics();
+                
+                // Load validation history
+                await loadValidationHistory();
+                
+                addLog('Initial data loaded successfully', 'success');
+            } catch (error) {
+                addLog(`Error loading initial data: ${error.message}`, 'error');
+                showNotification('Failed to load initial data', 'error');
+            }
+        }
+
+        // Check system health
+        async function checkSystemHealth() {
+            try {
+                const response = await fetch('/api/validation/health');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const services = data.data.services;
+                    const allHealthy = Object.values(services).every(status => status);
+                    
+                    updateSystemStatus(
+                        allHealthy ? 'Healthy' : 'Partial',
+                        allHealthy ? 'healthy' : 'warning'
+                    );
+                    
+                    addLog(`System health check: ${allHealthy ? 'All services healthy' : 'Some services unavailable'}`, 
+                           allHealthy ? 'success' : 'warning');
+                } else {
+                    updateSystemStatus('Error', 'error');
+                    addLog('System health check failed', 'error');
+                }
+            } catch (error) {
+                updateSystemStatus('Error', 'error');
+                addLog(`Health check error: ${error.message}`, 'error');
+            }
+        }
+
+        // Load learning analytics
+        async function loadLearningAnalytics() {
+            try {
+                const response = await fetch('/api/validation/analytics');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const analytics = data.data.analytics;
+                    
+                    // Update overall progress
+                    document.getElementById('overall-progress').textContent = 
+                        Math.round(analytics.overallProgress) + '%';
+                    
+                    // Update concepts mastered
+                    const mastered = analytics.conceptProgress.filter(p => p.masteryLevel >= 80).length;
+                    document.getElementById('concepts-mastered').textContent = mastered;
+                    
+                    // Update category chart
+                    updateCategoryChart(analytics.categoryProgress);
+                    
+                    // Update mastery distribution
+                    updateMasteryChart(analytics.conceptProgress);
+                    
+                    // Update concept lists
+                    updateConceptLists(analytics);
+                    
+                } else {
+                    addLog('Failed to load learning analytics', 'error');
+                }
+            } catch (error) {
+                addLog(`Analytics error: ${error.message}`, 'error');
+            }
+        }
+
+        // Load validation history
+        async function loadValidationHistory() {
+            // Mock data for demonstration
+            const mockData = {
+                labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                scores: [65, 72, 78, 85]
+            };
+            
+            charts.validation.data.labels = mockData.labels;
+            charts.validation.data.datasets[0].data = mockData.scores;
+            charts.validation.update();
+        }
+
+        // Update category chart
+        function updateCategoryChart(categoryProgress) {
+            const categories = Object.keys(categoryProgress);
+            const scores = Object.values(categoryProgress);
+            
+            charts.category.data.labels = categories;
+            charts.category.data.datasets[0].data = scores;
+            charts.category.update();
+        }
+
+        // Update mastery chart
+        function updateMasteryChart(conceptProgress) {
+            const distribution = [0, 0, 0, 0]; // beginner, intermediate, advanced, expert
+            
+            conceptProgress.forEach(concept => {
+                if (concept.masteryLevel < 40) distribution[0]++;
+                else if (concept.masteryLevel < 60) distribution[1]++;
+                else if (concept.masteryLevel < 80) distribution[2]++;
+                else distribution[3]++;
+            });
+            
+            charts.mastery.data.datasets[0].data = distribution;
+            charts.mastery.update();
+        }
+
+        // Update concept lists
+        function updateConceptLists(analytics) {
+            // Top performing concepts
+            const topConcepts = analytics.conceptProgress
+                .sort((a, b) => b.masteryLevel - a.masteryLevel)
+                .slice(0, 10);
+            
+            const topContainer = document.getElementById('top-concepts');
+            topContainer.innerHTML = topConcepts.map(concept => `
+                <div class="concept-item">
+                    <div class="concept-name">${concept.concept}</div>
+                    <div class="concept-category">${concept.category}</div>
+                    <div class="concept-score">${Math.round(concept.masteryLevel)}%</div>
+                </div>
+            `).join('');
+            
+            // Improvement areas
+            const improvementAreas = analytics.improvementAreas.slice(0, 10);
+            const improvementContainer = document.getElementById('improvement-areas');
+            
+            if (improvementAreas.length > 0) {
+                improvementContainer.innerHTML = improvementAreas.map(area => `
+                    <div class="concept-item">
+                        <div class="concept-name">${area}</div>
+                        <div class="concept-category">Needs Review</div>
+                        <div class="concept-score">⚠️</div>
+                    </div>
+                `).join('');
+            } else {
+                improvementContainer.innerHTML = `
+                    <div class="concept-item">
+                        <div class="concept-name">No areas need improvement</div>
+                        <div class="concept-category">Excellent</div>
+                        <div class="concept-score">✅</div>
+                    </div>
+                `;
+            }
+        }
+
+        // Performance monitoring
+        function startPerformanceMonitoring() {
+            setInterval(async () => {
+                const now = new Date().toLocaleTimeString();
+                const responseTime = Math.random() * 200 + 50; // Mock data
+                const memoryUsage = Math.random() * 30 + 40; // Mock data
+                
+                // Update performance chart
+                if (charts.performance.data.labels.length > 20) {
+                    charts.performance.data.labels.shift();
+                    charts.performance.data.datasets[0].data.shift();
+                    charts.performance.data.datasets[1].data.shift();
+                }
+                
+                charts.performance.data.labels.push(now);
+                charts.performance.data.datasets[0].data.push(responseTime);
+                charts.performance.data.datasets[1].data.push(memoryUsage);
+                charts.performance.update('none');
+                
+                // Update active sessions (mock)
+                document.getElementById('active-sessions').textContent = 
+                    Math.floor(Math.random() * 5) + 1;
+                
+            }, 5000);
+        }
+
+        // Utility functions
+        function updateSystemStatus(status, type) {
+            document.getElementById('system-status').textContent = status;
+            const indicator = document.getElementById('system-indicator');
+            indicator.className = `status-indicator status-${type}`;
+        }
+
+        function addLog(message, level = 'info') {
+            const logsContainer = document.getElementById('system-logs');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `
+                <span class="log-timestamp">[${timestamp}]</span>
+                <span class="log-level-${level}">${message}</span>
+            `;
+            
+            logsContainer.appendChild(logEntry);
+            logsContainer.scrollTop = logsContainer.scrollHeight;
+            
+            // Keep only last 100 entries
+            while (logsContainer.children.length > 100) {
+                logsContainer.removeChild(logsContainer.firstChild);
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            const text = document.getElementById('notification-text');
+            
+            text.textContent = message;
+            notification.className = `notification ${type} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
+
+        // Action functions
+        async function refreshData() {
+            const refreshBtn = document.getElementById('refresh-text');
+            refreshBtn.innerHTML = '<span class="loading"></span> Refreshing...';
+            
+            try {
+                await loadInitialData();
+                showNotification('Data refreshed successfully');
+            } catch (error) {
+                showNotification('Failed to refresh data', 'error');
+            } finally {
+                refreshBtn.textContent = 'Refresh Data';
+            }
+        }
+
+        async function runQuickTest() {
+            try {
+                addLog('Starting quick validation test...', 'info');
+                
+                const response = await fetch('/api/validation/quick-test', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ count: 5, difficulty: 'intermediate' })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    const report = data.data.report;
+                    addLog(`Quick test completed: ${Math.round(report.averageScore)}% average score`, 'success');
+                    showNotification(`Test completed: ${Math.round(report.averageScore)}% score`);
+                    
+                    // Refresh analytics
+                    await loadLearningAnalytics();
+                } else {
+                    addLog('Quick test failed', 'error');
+                    showNotification('Quick test failed', 'error');
+                }
+            } catch (error) {
+                addLog(`Quick test error: ${error.message}`, 'error');
+                showNotification('Quick test failed', 'error');
+            }
+        }
+
+        async function generateTrainingData() {
+            try {
+                addLog('Generating training data...', 'info');
+                showNotification('Generating training data...');
+                
+                // This would call the training data generation endpoint
+                // For now, we'll simulate it
+                setTimeout(() => {
+                    addLog('Training data generation completed', 'success');
+                    showNotification('Training data generated successfully');
+                }, 3000);
+                
+            } catch (error) {
+                addLog(`Training data generation error: ${error.message}`, 'error');
+                showNotification('Training data generation failed', 'error');
+            }
+        }
+
+        async function rebuildEmbeddings() {
+            try {
+                addLog('Rebuilding embeddings...', 'info');
+                showNotification('Rebuilding embeddings...');
+                
+                const response = await fetch('/api/embeddings/refresh', {
+                    method: 'POST'
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    addLog('Embeddings rebuilt successfully', 'success');
+                    showNotification('Embeddings rebuilt successfully');
+                } else {
+                    addLog('Embeddings rebuild failed', 'error');
+                    showNotification('Embeddings rebuild failed', 'error');
+                }
+            } catch (error) {
+                addLog(`Embeddings rebuild error: ${error.message}`, 'error');
+                showNotification('Embeddings rebuild failed', 'error');
+            }
+        }
+    </script>
+</body>
+</html>

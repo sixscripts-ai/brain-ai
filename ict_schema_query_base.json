@@ -1,0 +1,795 @@
+[
+  {
+    "model": "2‑Bar Reversal",
+    "pattern_description": "Two‑candle pattern: large candle in bias direction, small opposite candle with long wick covering >50 % of first candle.",
+    "conditions": ["Inside kill‑zone","Low volatility","No conflicting OB nearby"],
+    "typical_use": "Very short‑term scalps (5‑15 min)",
+    "example_chart": "GBP/JPY 5‑min 2024‑07‑03 2‑bar bullish → long"
+  },
+  {
+    "model": "3‑Bar Reversal",
+    "pattern_description": "Three‑candle pattern: two strong candles in bias direction, third small opposite with long wick.",
+    "conditions": ["After small consolidation","Volume dip on third bar"],
+    "typical_use": "Quick reversals on 15‑min / 30‑min",
+    "example_chart": "EUR/USD 15‑min 2024‑06‑10 3‑bar bullish → long"
+  },
+  {
+    "model": "4‑Bar Continuation",
+    "pattern_description": "Four‑candle pattern: three strong candles in direction, fourth small pull‑back (often inside OB) then continuation.",
+    "conditions": ["Confirmed BOS","OB present","Volume rising on 4th candle"],
+    "typical_use": "Trend‑following entries (higher TF)",
+    "example_chart": "AUD/USD 1‑h 2024‑05‑22 4‑bar continuation → long"
+  },
+  {
+    "model": "8‑Bar Accumulation/Distribution (A‑Zone / D‑Zone)",
+    "pattern_description": "Eight‑candle range with low volume, small bodies, minimal wicks; forms A‑Zone (up) or D‑Zone (down).",
+    "conditions": ["Preceded by swing high (A‑Zone) or swing low (D‑Zone)"],
+    "typical_use": "Zone identification for later breakout or breakdown",
+    "example_chart": "GBP/USD 4‑h 2024‑05‑30 8‑bar A‑Zone → breakout"
+  },
+  {
+    "model": "2×2 Pattern",
+    "pattern_description": "Two higher highs and two higher lows (or lower lows) forming a mini‑trend.",
+    "conditions": ["BOS after second high/low","Price respecting pattern"],
+    "typical_use": "Early trend confirmation",
+    "example_chart": "EUR/JPY 1‑h 2024‑06‑12 2×2 up → long"
+  },
+  {
+    "model": "3×3 Pattern",
+    "pattern_description": "Three higher highs and three higher lows (or lower lows) – stronger trend.",
+    "conditions": ["BOS after third high/low","Volume confirming"],
+    "typical_use": "Higher‑TF trend continuation",
+    "example_chart": "USD/CHF 4‑h 2024‑04‑15 3×3 up → long"
+  },
+  {
+    "model": "4×4 Pattern",
+    "pattern_description": "Four higher highs & four higher lows (or lower equivalents) – very strong trend.",
+    "conditions": ["Very strong trend","Often followed by propulsion block"],
+    "typical_use": "Long‑term trend riding",
+    "example_chart": "EUR/USD daily 2024‑03‑01 4×4 up → long"
+  },
+  {
+    "model": "ICT Market Structure (BOS/CHoCH)",
+    "pattern_description": "Classic swing‑high/low analysis with Break of Structure (BOS) and Change of Character (CHoCH).",
+    "conditions": ["BOS confirmed on higher TF","CHoCH signals bias flip"],
+    "typical_use": "Core for all other models",
+    "example_chart": "GBP/JPY daily 2023‑09‑15 HH 156 HL 151 BOS 158.20"
+  },
+  {
+    "model": "Displacement Model",
+    "pattern_description": "Single, very large candle breaking multiple swing points, often followed by short pullback.",
+    "conditions": ["Volume surge","Near kill‑zone"],
+    "typical_use": "Entry on pullback after displacement",
+    "example_chart": "EUR/USD daily 2024‑03‑15 displacement 1.0600‑1.0900"
+  },
+  {
+    "model": "Liquidity Sweep Pattern",
+    "pattern_description": "Sharp move into liquidity pool (stop‑hunt) then immediate reversal; creates a “sweep” wick.",
+    "conditions": ["Large volume spike","Swing high/low aligned with pool"],
+    "typical_use": "Entry on reversal after sweep",
+    "example_chart": "EUR/CHF 4‑h 2024‑04‑28 sweep down to 1.0500"
+  },
+  {
+    "model": "Smart Money Consolidation",
+    "pattern_description": "Tight range with low volume that later expands (breakout).",
+    "conditions": ["OB/FVG inside range","Low volatility"],
+    "typical_use": "Breakout entry (long or short)",
+    "example_chart": "USD/JPY 4‑h 2023‑11‑02 consolidation → breakout"
+  },
+  {
+    "technique": "BOS Pullback Entry",
+    "steps": [
+      "Identify BOS (break of prior swing).",
+      "Look for pullback to nearest OB/FVG.",
+      "Wait for bullish/bearish engulfing or pin‑bar at that zone.",
+      "Enter in direction of BOS.",
+      "Place stop below (long) or above (short) the zone."
+    ],
+    "when_to_use": "After a clear BOS and before the next swing.",
+    "typical_confirmation": "BOS confirmed on higher TF; zone aligns with OB/FVG; reversal candle.",
+    "chart_example": "EUR/USD 4‑h 2024‑06‑12 BOS 1.0825 → pullback to OB 1.0800 → long."
+  },
+  {
+    "technique": "Liquidity Sweep Pullback Entry",
+    "steps": [
+      "Spot liquidity pool (cluster of stops).",
+      "Observe a sharp move into pool (sweep).",
+      "Wait for price to reverse and retest pool edge.",
+      "Enter on reversal candle.",
+      "Stop beyond sweep wick."
+    ],
+    "when_to_use": "When a sudden stop‑hunt is evident.",
+    "typical_confirmation": "Large volume spike; long wick into pool; reversal candle.",
+    "chart_example": "AUD/USD 1‑h 2024‑04‑22 sweep to 0.6580 → retest 0.6595 → long."
+  },
+  {
+    "technique": "Pullback to Order Block Entry",
+    "steps": [
+      "Identify a valid Order Block.",
+      "Wait for price to break and then retrace to the OB.",
+      "Look for a reversal candle at that OB.",
+      "Enter in direction of original breakout."
+    ],
+    "when_to_use": "After a strong breakout (e.g., after BOS).",
+    "typical_confirmation": "OB aligns with higher‑TF bias; price respects OB on pullback; reversal candle.",
+    "chart_example": "GBP/USD 4‑h 2024‑05‑30 OB 1.2600 → breakout 1.2750 → pullback to OB 1.2625 → long."
+  },
+  {
+    "technique": "Breaker Block Reversal Entry",
+    "steps": [
+      "Spot a Breaker Block that fails (price breaks through its high/low).",
+      "Wait for retest of the broken level.",
+      "Look for a pin‑bar or engulfing candle opposite to the broken direction.",
+      "Enter on that candle."
+    ],
+    "when_to_use": "When a BB fails and polarity change is expected.",
+    "typical_confirmation": "Retest of broken level; reversal candle; volume pick‑up.",
+    "chart_example": "EUR/CHF 1‑h 2024‑04‑22 BB 1.0700 broken down → retest 1.0695 → short."
+  },
+  {
+    "technique": "Mitigation Block Confirmation Entry",
+    "steps": [
+      "Identify a partially filled OB (mitigation).",
+      "Observe price respecting the block again after a pullback.",
+      "Confirm with a bullish/bearish engulfing candle.",
+      "Enter in direction of the block’s original bias."
+    ],
+    "when_to_use": "After an initial stop‑hunt that partially filled the OB.",
+    "typical_confirmation": "Re‑test of block with low‑risk candle; volume support.",
+    "chart_example": "CAD/JPY 1‑h 2024‑03‑22 mitigation 87.10 → bounce 87.12 → long."
+  },
+  {
+    "technique": "2‑Bar Reversal Entry",
+    "steps": [
+      "Two‑bar pattern: first bar large in direction of bias, second bar small opposite with long wick.",
+      "Enter on close of second bar opposite direction."
+    ],
+    "when_to_use": "Very short‑term scalping inside kill‑zone.",
+    "typical_confirmation": "Clear 2‑bar reversal shape; low volatility; often 5‑min.",
+    "chart_example": "GBP/JPY 5‑min 2024‑07‑03 2‑bar bullish reversal → long."
+  },
+  {
+    "technique": "3‑Bar Reversal Entry",
+    "steps": [
+      "Three‑bar pattern: two strong candles in bias direction, third small opposite with long wick.",
+      "Enter on close of third candle opposite direction."
+    ],
+    "when_to_use": "When market shows short‑term exhaustion after a move.",
+    "typical_confirmation": "3‑bar shape; volume drop on third bar; often 15‑min.",
+    "chart_example": "EUR/USD 15‑min 2024‑06‑10 3‑bar bullish reversal → long."
+  },
+  {
+    "technique": "Displacement Breakout Entry",
+    "steps": [
+      "Spot a massive displacement candle (breaks multiple swing points).",
+      "Wait for the first pullback (10‑20 % retrace).",
+      "Enter on pullback bounce using OB/FVG."
+    ],
+    "when_to_use": "After a big “launch” candle that starts a new trend.",
+    "typical_confirmation": "Large candle, high volume, break of BOS; pullback respects OB/FVG.",
+    "chart_example": "EUR/USD daily 2024‑03‑15 displacement 1.0600‑1.0900 → pullback 1.0750 → long."
+  },
+  {
+    "technique": "Silver Bullet 20‑min Entry",
+    "steps": [
+      "Identify BOS and liquidity sweep within first 20 min of London/NY.",
+      "Wait for retest of sweep.",
+      "Enter on reversal candle before 20‑min window ends."
+    ],
+    "when_to_use": "Only during the 20‑min “silver‑bullet” window.",
+    "typical_confirmation": "BOS, sweep, and retest all happen inside 20‑min.",
+    "chart_example": "AUD/JPY 5‑min 2024‑06‑20 BOS 76.50 → sweep → retest 76.60 → long before 20‑min ends."
+  },
+  {
+    "technique": "MTA (Multiple‑TF Alignment) Entry",
+    "steps": [
+      "Confirm same OB/FVG on higher TF (e.g., daily).",
+      "Drop to lower TF (e.g., 1‑h) and wait for pullback to same zone.",
+      "Enter on reversal candle on lower TF."
+    ],
+    "when_to_use": "When you need extra confidence, especially in volatile sessions.",
+    "typical_confirmation": "Higher‑TF bias matches lower‑TF entry; zone aligns on both TFs.",
+    "chart_example": "AUD/USD daily + 4‑h OB 0.6600 → pullback 4‑h 0.6585 → long."
+  },
+  {
+    "model": "Sell Model A – OB Short Pullback",
+    "required_confluence": ["Bearish OB higher TF","FVG below OB","BOS downtrend","Kill‑Zone"],
+    "entry_trigger": "Pullback to OB low after FVG fill → bearish engulfing",
+    "stop_placement": "Above OB high",
+    "target_R_multiple": "62‑79 % retracement of prior up move or next BOS down",
+    "typical_tf": "4‑h OB + 1‑h pullback",
+    "chart_example": "EUR/USD 4‑h 2024‑06‑12 Bearish OB 1.0850, FVG filled, short @1.0845"
+  },
+  {
+    "model": "Sell Model B – Liquidity Sweep Short after FVG",
+    "required_confluence": ["Bearish FVG","Liquidity pool above","BOS down","within Kill‑Zone"],
+    "entry_trigger": "Sweep down into pool → retest top of FVG → bearish pin‑bar",
+    "stop_placement": "Above FVG high",
+    "target_R_multiple": "2 R or next swing low",
+    "typical_tf": "1‑h FVG + 15‑min entry",
+    "chart_example": "GBP/JPY 1‑h 2024‑05‑20 Bearish FVG 156.00‑156.30 sweep down 155.80, short @155.85"
+  },
+  {
+    "model": "Sell Model C – Rejection Block Short",
+    "required_confluence": ["Rejection block with strong bearish wick","BOS down","Kill‑Zone"],
+    "entry_trigger": "Bearish pin‑bar rejecting block",
+    "stop_placement": "Above block high",
+    "target_R_multiple": "1.5 R or next structural low",
+    "typical_tf": "30‑min chart",
+    "chart_example": "NZD/USD 30‑min 2024‑05‑10 Bearish rejection block 0.6100, short @0.6090"
+  },
+  {
+    "model": "Sell Model D – Distribution‑Zone Breakdown + Displacement",
+    "required_confluence": ["D‑Zone","Displacement down candle","High volume","Kill‑Zone"],
+    "entry_trigger": "Close below D‑Zone with strong candle",
+    "stop_placement": "Above D‑Zone high",
+    "target_R_multiple": "2‑3 R or next major swing low",
+    "typical_tf": "Daily D‑Zone + 4‑h entry",
+    "chart_example": "USD/JPY daily 2023‑09‑15 D‑Zone 152.00‑151.70 breakdown 151.30"
+  },
+  {
+    "model": "Sell Model E – Breaker Block Short Reversal",
+    "required_confluence": ["Bearish BB after failed bullish move","Liquidity sweep","BOS down"],
+    "entry_trigger": "Retest of broken BB high → bearish engulfing",
+    "stop_placement": "Above BB high",
+    "target_R_multiple": "2 R or next swing low",
+    "typical_tf": "1‑h BB + 15‑min entry",
+    "chart_example": "EUR/CHF 1‑h 2024‑04‑22 BB 1.0700 broken down, short @1.0695"
+  },
+  {
+    "model": "Buy Model A – OB Pullback + FVG Fill",
+    "required_confluence": ["Higher‑TF OB","FVG inside OB","BOS uptrend","London Kill‑Zone"],
+    "entry_trigger": "Pullback to OB high after FVG filled → bullish engulfing",
+    "stop_placement": "Below OB low (or below FVG low)",
+    "target_R_multiple": "62‑79 % retracement of move that created OB or next BOS",
+    "typical_tf": "4‑h OB + 1‑h pullback",
+    "chart_example": "EUR/USD 4‑h 2024‑06‑12 OB 1.0800, FVG 1.0795‑1.0805 filled, long @1.0806, SL 1.0780, TP 1.0850"
+  },
+  {
+    "model": "Buy Model B – Breaker Block Reversal after Liquidity Sweep",
+    "required_confluence": ["Bearish BB on lower TF","Liquidity sweep into pool","BOS up","within Kill‑Zone"],
+    "entry_trigger": "After sweep, price retests broken BB level → bullish pin‑bar",
+    "stop_placement": "Below BB low",
+    "target_R_multiple": "2 R or next swing high",
+    "typical_tf": "1‑h BB + 15‑min entry",
+    "chart_example": "AUD/USD 1‑h 2024‑04‑22 BB 0.6600 broken down, sweep 0.6580, retest long @0.6595"
+  },
+  {
+    "model": "Buy Model C – Mitigation Block Bounce + PD Zone",
+    "required_confluence": ["Partially‑filled mitigation block","Price in 20‑30 % discount PD zone","Up‑trend BOS"],
+    "entry_trigger": "Bullish engulfing at mitigation block",
+    "stop_placement": "Below block low",
+    "target_R_multiple": "1.5 R or next structural high",
+    "typical_tf": "30‑min chart",
+    "chart_example": "GBP/JPY 30‑min 2024‑06‑14 Mitigation 155.20, PD 20 % discount, long @155.30, SL 155.00"
+  },
+  {
+    "model": "Buy Model D – Accumulation‑Zone Breakout + Displacement",
+    "required_confluence": ["A‑Zone","Displacement candle breaking above zone","Volume surge","London Kill‑Zone"],
+    "entry_trigger": "Close above A‑Zone with strong candle",
+    "stop_placement": "Below A‑Zone low",
+    "target_R_multiple": "2‑3 R or Fib‑extension 161.8 %",
+    "typical_tf": "Daily A‑Zone + 4‑h entry",
+    "chart_example": "USD/CHF daily 2023‑08‑01 A‑Zone 0.910‑0.925 → breakout 0.945 on 4‑h"
+  },
+  {
+    "model": "Buy Model E – Propulsion Block Momentum Burst",
+    "required_confluence": ["Propulsion block","High volume","Within Kill‑Zone"],
+    "entry_trigger": "Break above propulsion block high with large candle",
+    "stop_placement": "Below block low",
+    "target_R_multiple": "3 R or Fib‑extension 200 %",
+    "typical_tf": "15‑min chart",
+    "chart_example": "GBP/USD 15‑min 2024‑07‑01 Propulsion 1.2720 → breakout 1.2765, TP 1.2850"
+  },
+  {
+    "concept": "Order Block (OB)",
+    "definition": "Institutional price zone of last opposing candle before a directional move",
+    "key_characteristics": [
+      "Last candle before move",
+      "Zone of heavy institutional order flow"
+    ],
+    "typical_confirmation": "OB in line with higher‑timeframe bias",
+    "trading_rule": "Enter at OB after sweep",
+    "common_mistake": "Mistaking any support/resistance as OB",
+    "related_concepts": ["Liquidity Sweep", "Fair Value Gap"]
+  },
+  {
+    "concept": "Fair Value Gap (FVG)",
+    "definition": "Price imbalance/inefficiency that seeks rebalancing",
+    "key_characteristics": [
+      "Three‑candle gap",
+      "No trading in gap area"
+    ],
+    "typical_confirmation": "FVG aligned with OB",
+    "trading_rule": "Target retracement 62‑79%",
+    "common_mistake": "Over‑trading gaps",
+    "related_concepts": ["Order Block", "Liquidity Void"]
+  },
+  {
+    "concept": "Liquidity Pool",
+    "definition": "Cluster of stop‑losses or large orders institutions target",
+    "key_characteristics": [
+      "High‑volume nodes",
+      "Often near prior swing highs/lows"
+    ],
+    "typical_confirmation": "Liquidity pool near OB or FVG",
+    "trading_rule": "Place stop beyond pool",
+    "common_mistake": "Ignoring pool placement",
+    "related_concepts": ["Order Block", "Liquidity Sweep"]
+  },
+  {
+    "concept": "Premium/Discount (PD) Array",
+    "definition": "Value‑based pricing zones (0‑30 % discount, 70‑100 % premium)",
+    "key_characteristics": [
+      "Defines ideal entry zones"
+    ],
+    "typical_confirmation": "Entry within correct PD range",
+    "trading_rule": "Use PD for risk sizing",
+    "common_mistake": "Entering outside PD",
+    "related_concepts": ["Order Block", "Fair Value Gap"]
+  },
+  {
+    "concept": "Market Structure",
+    "definition": "Higher highs/lows, Break‑of‑Structure (BOS), Change‑of‑Character (CHoCH)",
+    "key_characteristics": [
+      "Determines bias"
+    ],
+    "typical_confirmation": "Break of structure confirms bias",
+    "trading_rule": "Align trades with new structure",
+    "common_mistake": "Misreading structure",
+    "related_concepts": ["AMD Model", "PO3 Model"]
+  },
+  {
+    "concept": "Kill Zone",
+    "definition": "High‑probability trading windows (London, NY, Asian sessions)",
+    "key_characteristics": [
+      "Specific time windows"
+    ],
+    "typical_confirmation": "Trade only in kill zone",
+    "trading_rule": "Wait for kill zone",
+    "common_mistake": "Trading outside window",
+    "related_concepts": ["Macro Times"]
+  },
+  {
+    "concept": "Silver Bullet",
+    "definition": "20‑minute precision window for high‑probability trades",
+    "key_characteristics": [
+      "Specific minutes in session"
+    ],
+    "typical_confirmation": "Align entry with silver‑bullet window",
+    "trading_rule": "Tight timing",
+    "common_mistake": "Mis‑timed entry",
+    "related_concepts": ["Kill Zone"]
+  },
+  {
+    "concept": "AMD Model",
+    "definition": "Accumulation → Manipulation → Distribution phases",
+    "key_characteristics": [
+      "Three phases"
+    ],
+    "typical_confirmation": "Identify phase before entry",
+    "trading_rule": "Trade within the identified phase",
+    "common_mistake": "Ignoring phase",
+    "related_concepts": ["PO3 Model", "Judas Swing"]
+  },
+  {
+    "concept": "PO3 Model",
+    "definition": "Consolidation → Manipulation → Trend cycle (repeats each session)",
+    "key_characteristics": [
+      "Three phases"
+    ],
+    "typical_confirmation": "Look for consolidation break",
+    "trading_rule": "Enter on trend continuation",
+    "common_mistake": "Overlooking manipulation",
+    "related_concepts": ["AMD Model"]
+  },
+  {
+    "concept": "Judas Swing",
+    "definition": "False move in the first 30‑60 min of a session to trap retail traders",
+    "key_characteristics": [
+      "Early‑session reversal"
+    ],
+    "typical_confirmation": "Wait for second swing",
+    "trading_rule": "Avoid early trade",
+    "common_mistake": "Jumping in too early",
+    "related_concepts": ["PO3 Model"]
+  },
+  {
+    "concept": "Breaker Block",
+    "definition": "Failed OB that changes polarity",
+    "key_characteristics": [
+      "OB fails to hold"
+    ],
+    "typical_confirmation": "Watch for reversal after failure",
+    "trading_rule": "Exit on failure",
+    "common_mistake": "Treating as normal OB",
+    "related_concepts": ["Order Block"]
+  },
+  {
+    "concept": "Mitigation Block",
+    "definition": "Partially filled OB that still matters",
+    "key_characteristics": [
+      "Partial fill",
+      "Still a zone of interest"
+    ],
+    "typical_confirmation": "Keep as support/resistance",
+    "trading_rule": "Use for stop placement",
+    "common_mistake": "Ignoring mitigation",
+    "related_concepts": ["Order Block"]
+  },
+  {
+    "concept": "Propulsion Block",
+    "definition": "Last OB before an explosive move",
+    "key_characteristics": [
+      "Highest OB before trend acceleration"
+    ],
+    "typical_confirmation": "Enter on break of block",
+    "trading_rule": "Use for breakout entries",
+    "common_mistake": "Missing propulsion block",
+    "related_concepts": ["Order Block"]
+  },
+  {
+    "concept": "Rejection Block",
+    "definition": "OB with strong initial price rejection",
+    "key_characteristics": [
+      "Sharp price rejection candle"
+    ],
+    "typical_confirmation": "Use as reversal signal",
+    "trading_rule": "Enter after rejection",
+    "common_mistake": "Misreading rejection",
+    "related_concepts": ["Order Block"]
+  },
+  {
+    "concept": "Swing Failure Pattern (SFP)",
+    "definition": "Brief violation of a level that fails and reverses",
+    "key_characteristics": [
+      "Small move into next zone then reverse"
+    ],
+    "typical_confirmation": "Look for SFP after OB/FVG",
+    "trading_rule": "Trade reversal",
+    "common_mistake": "Over‑confident SFP",
+    "related_concepts": ["Order Block", "Fair Value Gap"]
+  },
+  {
+    "concept": "Liquidity Sweep",
+    "definition": "False break to trigger stops before a reversal",
+    "key_characteristics": [
+      "Sharp move then rapid reversal"
+    ],
+    "typical_confirmation": "Enter after sweep completion",
+    "trading_rule": "Use sweep as entry trigger",
+    "common_mistake": "Ignoring sweep",
+    "related_concepts": ["Liquidity Pool"]
+  },
+  {
+    "concept": "Smart Money Concepts (SMC)",
+    "definition": "Trading with institutional flow rather than retail noise",
+    "key_characteristics": [
+      "Focus on OB, FVG, sweeps, liquidity pools"
+    ],
+    "typical_confirmation": "Apply all SMC concepts together",
+    "trading_rule": "Follow SMC methodology",
+    "common_mistake": "Trading retail‑centric",
+    "related_concepts": ["All concepts above"]
+  },
+  {
+    "concept": "Institutional Order Flow",
+    "definition": "Reading large‑order footprints via OBs, FVGs, sweeps",
+    "key_characteristics": [
+      "Footprint data",
+      "Volume spikes"
+    ],
+    "typical_confirmation": "Confirm with OB/FVG alignment",
+    "trading_rule": "Enter on institutional signals",
+    "common_mistake": "Misreading flow",
+    "related_concepts": ["Smart Money Concepts"]
+  },
+  {
+    "concept": "Displacement",
+    "definition": "Strong impulsive move indicating institutional activity",
+    "key_characteristics": [
+      "Sudden large price move"
+    ],
+    "typical_confirmation": "Use as trend‑confirmation signal",
+    "trading_rule": "Enter on displacement",
+    "common_mistake": "Missing displacement",
+    "related_concepts": ["Order Block"]
+  },
+  {
+    "concept": "Liquidity Void",
+    "definition": "Area of no trading activity (large gaps)",
+    "key_characteristics": [
+      "Large chart gaps"
+    ],
+    "typical_confirmation": "Treat as potential reversal area",
+    "trading_rule": "Place stop beyond void",
+    "common_mistake": "Ignoring void",
+    "related_concepts": ["Fair Value Gap"]
+  },
+  {
+    "concept": "Volume Imbalance",
+    "definition": "Disproportionate buy/sell volume creating inefficiency",
+    "key_characteristics": [
+      "Large buy or sell volume spikes"
+    ],
+    "typical_confirmation": "Look for imbalance with OB/FVG",
+    "trading_rule": "Use imbalance as entry trigger",
+    "common_mistake": "Ignoring imbalance",
+    "related_concepts": ["Fair Value Gap", "Order Block"]
+  },
+  {
+    "concept": "ICT Order Block (OB)",
+    "definition": "Institutional price zone of the last opposing candle before a directional move.",
+    "key_characteristics": ["Last candle before move","Heavy institutional order flow","1‑2‑candle cluster"],
+    "typical_confirmation": "Alignment with higher‑timeframe bias; price retests block; BOS after retest.",
+    "ict_entry_technique": "Pullback to OB after liquidity sweep → breakout of OB’s high/low.",
+    "ict_price_action_model": "Foundation of the “Market Structure” model; used in OB‑pullback set‑ups.",
+    "common_mistake": "Treating any support/resistance line as an OB.",
+    "related_concepts": ["Liquidity Sweep","Fair Value Gap","Breaker Block","Mitigation Block"],
+    "chart_example": "EUR/USD 4‑h 2024‑06‑12 OB @ 1.0800, retest → BOS @ 1.0825."
+  },
+  {
+    "concept": "ICT Fair Value Gap (FVG)",
+    "definition": "Three‑candle price gap creating an inefficiency.",
+    "key_characteristics": ["3‑candle pattern","Middle candle’s high < previous low (bull) or low > previous high (bear)"],
+    "typical_confirmation": "Gap aligns with an OB; price returns to fill gap before continuation.",
+    "ict_entry_technique": "Enter at edge of gap after it’s filled (2nd candle low for bullish, high for bearish).",
+    "ict_price_action_model": "Core of the “Imbalance” model; combined with OB for high‑prob entries.",
+    "common_mistake": "Jumping in before any price interaction.",
+    "related_concepts": ["Order Block","Liquidity Void","Volume Imbalance"],
+    "chart_example": "GBP/JPY 1‑h 2024‑05‑20 bullish FVG 158.80‑159.20 filled 159.45 → up to 160.10."
+  },
+  {
+    "concept": "ICT Liquidity Void",
+    "definition": "Large area with little or no trading activity (often a gap).",
+    "key_characteristics": ["Wide price gap","Low volume","Appears after sharp moves"],
+    "typical_confirmation": "Price typically reverses when reaching void; stop‑hunt may occur.",
+    "ict_entry_technique": "Place stops beyond void; consider entering on opposite side after bounce.",
+    "ict_price_action_model": "“Liquidity Void” in the ICT “Imbalance” framework.",
+    "common_mistake": "Trading inside the void expecting continuation.",
+    "related_concepts": ["Fair Value Gap","Liquidity Sweep","Volume Imbalance"],
+    "chart_example": "USD/JPY daily 2023‑11‑02 gap 149.00‑149.70 reversed at 149.70."
+  },
+  {
+    "concept": "ICT Liquidity Pool",
+    "definition": "Cluster of stop‑losses or large institutional orders that the market targets.",
+    "key_characteristics": ["Usually just above recent highs or below recent lows","High‑volume nodes","Visible on volume‑profile"],
+    "typical_confirmation": "Price moves into pool → sharp sweep → reversal.",
+    "ict_entry_technique": "Enter after sweep when price retests pool and shows reversal candle.",
+    "ict_price_action_model": "Drives “Liquidity Sweep” patterns.",
+    "common_mistake": "Ignoring pool location or entering before sweep finishes.",
+    "related_concepts": ["Liquidity Sweep","Order Block","Fair Value Gap"],
+    "chart_example": "EUR/GBP 4‑h 2024‑04‑15 pool @ 0.8600, sweep down to 0.8570 → reversal up."
+  },
+  {
+    "concept": "ICT Breaker Block (BB)",
+    "definition": "An OB that fails to hold, flipping market polarity.",
+    "key_characteristics": ["Same visual as OB but price breaks through its high/low quickly","Often retested"],
+    "typical_confirmation": "Retest of broken level with reversal candle (pin‑bar, engulfing).",
+    "ict_entry_technique": "Short after bullish BB fails; long after bearish BB fails; entry at retest of broken level.",
+    "ict_price_action_model": "“Breaker” in the ICT “Market Structure” model – signals reversal.",
+    "common_mistake": "Treating BB as a normal OB and expecting continuation.",
+    "related_concepts": ["Order Block","Rejection Block","Swing Failure Pattern"],
+    "chart_example": "AUD/USD daily 2023‑12‑08 bullish BB @ 0.6800 broken → retest → sell."
+  },
+  {
+    "concept": "ICT Mitigation Block",
+    "definition": "Partially filled OB that still acts as support/resistance.",
+    "key_characteristics": ["Partial fill","Still a zone of interest","Often after stop‑hunt"],
+    "typical_confirmation": "Price respects block again after pullback; a mitigation of earlier stop‑hunt.",
+    "ict_entry_technique": "Enter on bounce off mitigation block with confirmation (bullish engulfing for long).",
+    "ict_price_action_model": "Part of the “Order Block Lifecycle”.",
+    "common_mistake": "Ignoring block after first fill.",
+    "related_concepts": ["Order Block","Breaker Block","Liquidity Sweep"],
+    "chart_example": "CAD/JPY 1‑h 2024‑03‑22 OB @ 87.10 partially filled → bounce @ 87.12."
+  },
+  {
+    "concept": "ICT Propulsion Block",
+    "definition": "The last OB before an explosive, high‑momentum move.",
+    "key_characteristics": ["Highest high (or lowest low) OB preceding strong breakout","Large volume"],
+    "typical_confirmation": "Break of block’s high/low with strong momentum; continuation for several bars.",
+    "ict_entry_technique": "Enter on break of propulsion block with tight stop below (long) / above (short).",
+    "ict_price_action_model": "“Launch pad” in the ICT “Displacement” model.",
+    "common_mistake": "Missing the block or entering too late.",
+    "related_concepts": ["Order Block","Displacement","Momentum Burst"],
+    "chart_example": "GBP/USD 15‑min 2024‑07‑01 propulsion block @ 1.2720 → breakout to 1.2760."
+  },
+  {
+    "concept": "ICT Rejection Block",
+    "definition": "OB that shows immediate sharp price rejection on first touch.",
+    "key_characteristics": ["Strong candle with long opposite‑direction wick","Volume spike"],
+    "typical_confirmation": "Pin‑bar or engulfing candle rejecting block; volume surge.",
+    "ict_entry_technique": "Enter after rejection candle closes, targeting next structure level.",
+    "ict_price_action_model": "“Micro‑reversal” within larger ICT structure.",
+    "common_mistake": "Assuming block will hold and continuing in original direction.",
+    "related_concepts": ["Order Block","Breaker Block","Swing Failure Pattern"],
+    "chart_example": "NZD/USD 4‑h 2024‑05‑10 bullish rejection block @ 0.6100 → pin‑bar up → move to 0.6180."
+  },
+  {
+    "concept": "ICT Swing Failure Pattern (SFP)",
+    "definition": "Brief breach of swing high/low that fails and reverses.",
+    "key_characteristics": ["Small move into next zone, then close back below (bull) / above (bear)"],
+    "typical_confirmation": "Candle closing beyond swing high/low with reversal pattern; volume surge.",
+    "ict_entry_technique": "Enter on reversal candle after SFP; use breached swing as stop.",
+    "ict_price_action_model": "“Failure” pattern for quick reversals.",
+    "common_mistake": "Taking the initial breach as a breakout.",
+    "related_concepts": ["Order Block","Breaker Block","Liquidity Sweep"],
+    "chart_example": "USD/CAD 1‑h 2024‑06‑18 bullish SFP @ 1.3400 → reversed to 1.3365."
+  },
+  {
+    "concept": "ICT Liquidity Sweep",
+    "definition": "False breakout that triggers clustered stops before reversing.",
+    "key_characteristics": ["Sharp, rapid move into pool of liquidity then immediate reversal","Often a “stop‑hunt”"],
+    "typical_confirmation": "Large volume spike; wick into liquidity pool; reversal candle.",
+    "ict_entry_technique": "Enter on reversal after sweep; stop placed beyond sweep’s high/low.",
+    "ict_price_action_model": "“Stop‑hunt” element confirming institutional liquidity.",
+    "common_mistake": "Chasing the initial move before reversal.",
+    "related_concepts": ["Liquidity Pool","Order Block","Swing Failure Pattern"],
+    "chart_example": "EUR/CHF 4‑h 2024‑04‑28 sweep down to 1.0500 (pool) → reversal up to 1.0535."
+  },
+  {
+    "concept": "ICT Market Structure",
+    "definition": "Series of swing points (HH/HL) + BOS/CHoCH that define market direction.",
+    "key_characteristics": ["Identify swing highs/lows","BOS = break of prior swing","CHoCH = change of character"],
+    "typical_confirmation": "BOS confirmed on higher timeframe; price closes beyond swing point.",
+    "ict_entry_technique": "Pullback after BOS → entry using OB/FVG for confluence.",
+    "ict_price_action_model": "Core of all ICT analysis – the “backbone”.",
+    "common_mistake": "Mis‑labeling swing points; ignoring higher‑timeframe bias.",
+    "related_concepts": ["Power of Three Model","AMD Model","Order Block"],
+    "chart_example": "GBP/JPY daily 2023‑09‑15 HH 156.00 HL 151.00 BOS 158.20."
+  },
+  {
+    "concept": "ICT Kill Zone",
+    "definition": "High‑probability time windows aligned with major market sessions.",
+    "key_characteristics": ["London Open 07:00‑09:00 GMT","NY Open 13:00‑15:00 GMT","Asian 00:00‑02:00 GMT"],
+    "typical_confirmation": "Volume spikes; larger candle bodies; frequent BOS.",
+    "ict_entry_technique": "Trade only inside kill zones; combine with OB/FVG confluence.",
+    "ict_price_action_model": "Time‑filter applied to every set‑up.",
+    "common_mistake": "Trading outside the zone.",
+    "related_concepts": ["Silver Bullet","Macro Times","Session Analysis"],
+    "chart_example": "EUR/USD 1‑h 2024‑07‑12 strong move at 07:30 GMT (London Open)."
+  },
+  {
+    "concept": "ICT Silver Bullet",
+    "definition": "20‑minute precision window (first 20 min of London/NY) for high‑prob setups.",
+    "key_characteristics": ["20‑min period","Often contains BOS + liquidity sweep"],
+    "typical_confirmation": "BOS → sweep → retest within the 20‑min window.",
+    "ict_entry_technique": "Enter on retest after sweep inside 20‑min window; stop just beyond sweep.",
+    "ict_price_action_model": "Very tight timing – must be watching chart.",
+    "common_mistake": "Missing window or entering after it closes.",
+    "related_concepts": ["Kill Zone","Session Open","BOS"],
+    "chart_example": "AUD/JPY 5‑min 2024‑06‑20 BOS 76.50 00:05 GMT → sweep → retest 00:22 GMT."
+  },
+  {
+    "concept": "ICT Power of Three (PO3) Model",
+    "definition": "3‑phase cycle: Accumulation → Manipulation → Trend (or Distribution → Manipulation → Trend).",
+    "key_characteristics": ["Accumulation range","Manipulation (sharp stop‑hunt)","Trend continuation"],
+    "typical_confirmation": "Consolidation → breakout with volume surge.",
+    "ict_entry_technique": "Enter at breakout of manipulation into trend; confirm with OB/FVG.",
+    "ict_price_action_model": "Core cycle framework for ICT analysis.",
+    "common_mistake": "Skipping manipulation and entering too early.",
+    "related_concepts": ["AMD Model","Market Structure","Liquidity Sweep"],
+    "chart_example": "USD/CHF daily 2023‑08‑01 accumulation 0.910‑0.925 → breakout 0.945."
+  },
+  {
+    "concept": "ICT AMD Model",
+    "definition": "Institutional Accumulation → Manipulation → Distribution phases.",
+    "key_characteristics": ["Accumulation zone","Manipulation swing","Distribution swing; mirrored in swing points"],
+    "typical_confirmation": "Sharp move (manipulation) after range; followed by continuation or reversal.",
+    "ict_entry_technique": "Enter during manipulation with OB/FVG confluence; exit in distribution.",
+    "ict_price_action_model": "Provides timing context for entries/exits.",
+    "common_mistake": "Ignoring distribution phase → staying in losing trade.",
+    "related_concepts": ["Power of Three Model","Market Structure","Liquidity Sweep"],
+    "chart_example": "EUR/GBP daily 2023‑11‑10 accumulation 0.850‑0.860 → manipulation 0.880 → distribution 0.845."
+  },
+  {
+    "concept": "ICT Accumulation Zone (A‑Zone)",
+    "definition": "Tight range where institutions build positions (usually preceding bullish move).",
+    "key_characteristics": ["Small range","Low volatility","Low volume","Frequent re‑tests"],
+    "typical_confirmation": "Break of zone with strong candle & volume increase.",
+    "ict_entry_technique": "Buy on breakout; stop below zone.",
+    "ict_price_action_model": "First phase of PO3/AMD.",
+    "common_mistake": "Entering inside zone without breakout confirmation.",
+    "related_concepts": ["Distribution Zone","Power of Three","AMD"],
+    "chart_example": "GBP/USD 4‑h 2024‑05‑30 A‑Zone 1.2600‑1.2650 → breakout 1.2750."
+  },
+  {
+    "concept": "ICT Distribution Zone (D‑Zone)",
+    "definition": "Tight range where institutions unload positions (usually preceding bearish move).",
+    "key_characteristics": ["Small range","Low volume","Often after rally"],
+    "typical_confirmation": "Break below zone with strong bearish candle & volume.",
+    "ict_entry_technique": "Short on breakdown; stop above zone.",
+    "ict_price_action_model": "Final phase of PO3/AMD.",
+    "common_mistake": "Taking longs inside D‑Zone.",
+    "related_concepts": ["Accumulation Zone","Power of Three","AMD"],
+    "chart_example": "USD/JPY 4‑h 2024‑04‑22 D‑Zone 152.00‑151.70 → breakdown 151.30."
+  },
+  {
+    "concept": "ICT Displacement",
+    "definition": "Sudden, large‑scale move signalling strong institutional activity – start of new trend.",
+    "key_characteristics": ["Huge candle","High volume","Breaks multiple swing points","Minimal initial retracement"],
+    "typical_confirmation": "Follow‑up candles maintain direction; volume stays elevated.",
+    "ict_entry_technique": "Enter on first pullback after displacement, using OB/FVG as support/resistance.",
+    "ict_price_action_model": "“Launch” component of PO3/AMD cycle.",
+    "common_mistake": "Chasing the initial move without a pullback.",
+    "related_concepts": ["Propulsion Block","Momentum Burst","Market Structure"],
+    "chart_example": "EUR/USD daily 2024‑03‑15 displacement 1.0600 → 1.0900 in 2 days."
+  },
+  {
+    "concept": "ICT Institutional Order Flow",
+    "definition": "Footprint of large institutional trades observable via OBs, volume spikes, and imbalance zones.",
+    "key_characteristics": ["High‑volume spikes","Repeated OBs","Order‑block formation"],
+    "typical_confirmation": "Confluence of OB, FVG, volume imbalance on multiple TFs.",
+    "ict_entry_technique": "Enter when price respects an OB that aligns with order‑flow evidence.",
+    "ict_price_action_model": "Underlying layer for all ICT models – confirmation tier.",
+    "common_mistake": "Relying on price patterns alone without flow confirmation.",
+    "related_concepts": ["Volume Imbalance","Smart Money Concepts","ICT Order Block"],
+    "chart_example": "EUR/USD 1‑h 2024‑07‑05 volume spike 1.0820 coinciding with OB."
+  },
+  {
+    "concept": "ICT Volume Imbalance",
+    "definition": "Disproportionate buying or selling volume creating a micro‑inefficiency.",
+    "key_characteristics": ["Large delta on cumulative‑delta","Volume‑histogram spikes","Often aligns with FVG"],
+    "typical_confirmation": "Imbalance aligns with OB/FVG and a price reversal.",
+    "ict_entry_technique": "Enter on reversal after imbalance is absorbed.",
+    "ict_price_action_model": "Micro‑structure element for fine‑tuned entries.",
+    "common_mistake": "Assuming every imbalance leads to reversal.",
+    "related_concepts": ["Fair Value Gap","Order Block","Liquidity Void"],
+    "chart_example": "GBP/USD 5‑min 2024‑06‑14 sell imbalance 1.2750 → reversal 1.2740."
+  },
+  {
+    "concept": "ICT Multiple‑Timeframe Alignment (MTA)",
+    "definition": "Confirming a set‑up across two or more time‑frames.",
+    "key_characteristics": ["Same confluence (OB, FVG, BOS) visible on higher & lower TFs"],
+    "typical_confirmation": "Higher‑TF bias matches lower‑TF entry.",
+    "ict_entry_technique": "Enter on lower‑TF pullback after higher‑TF confirmation.",
+    "ict_price_action_model": "Time‑filter applied to any ICT model.",
+    "common_mistake": "Ignoring higher‑TF bias; entering on lower‑TF only.",
+    "related_concepts": ["Market Structure","Power of Three","Smart Money Concepts"],
+    "chart_example": "AUD/USD daily + 4‑h OB 0.6600 (daily) → pullback 4‑h 0.6585."
+  },
+  {
+    "concept": "ICT Pullback Entry",
+    "definition": "Entry on a pullback to a key institutional zone after a breakout.",
+    "key_characteristics": ["Retrace 30‑70% of move","Respects zone","Then resumes direction"],
+    "typical_confirmation": "Reversal candle at zone + volume pick‑up.",
+    "ict_entry_technique": "Place entry just above (long) / below (short) zone after confirmation.",
+    "ict_price_action_model": "Refinement of OB/FVG models.",
+    "common_mistake": "Entering before confirmation or on wrong side of zone.",
+    "related_concepts": ["Order Block","Fair Value Gap","Multiple‑Timeframe Alignment"],
+    "chart_example": "USD/CHF 15‑min 2024‑06‑28 pullback to OB 0.9100 after breakout."
+  },
+  {
+    "concept": "ICT Breakout Entry",
+    "definition": "Entry taken as soon as a key level (OB, FVG, A‑Zone) is broken.",
+    "key_characteristics": ["Immediate entry","Usually high momentum","Large candle"],
+    "typical_confirmation": "Large candle, volume surge, break of BOS.",
+    "ict_entry_technique": "Enter on candle close beyond zone; stop just inside zone.",
+    "ict_price_action_model": "Used for “propulsion” or “displacement” entries.",
+    "common_mistake": "False breakout; insufficient volume confirmation.",
+    "related_concepts": ["Propulsion Block","Displacement","Liquidity Sweep"],
+    "chart_example": "GBP/JPY 5‑min 2024‑07‑03 breakout above OB 156.20 → entry 156.25."
+  },
+  {
+    "concept": "ICT Stop Hunt",
+    "definition": "Deliberate move that hunts retail stops before resuming original direction (a subtype of liquidity sweep).",
+    "key_characteristics": ["Sharp move into stop pool","Long wick","Reversal"],
+    "typical_confirmation": "Volume spike, wick into stop zone, reversal candle.",
+    "ict_entry_technique": "Enter on reversal after stop‑hunt; stop beyond wick.",
+    "ict_price_action_model": "Stop‑hunt element confirming institutional liquidity.",
+    "common_mistake": "Chasing initial move; not respecting reversal.",
+    "related_concepts": ["Liquidity Sweep","Liquidity Pool","Swing Failure Pattern"],
+    "chart_example": "EUR/USD 1‑h 2024‑06‑10 stop‑hunt down 1.0750 → reversal up."
+  },
+  {
+    "concept": "ICT Smart Money Concepts (SMC)",
+    "definition": "Over‑arching methodology that trades with institutional order flow (OB, FVG, liquidity pools, market structure).",
+    "key_characteristics": ["Emphasis on institutional zones","Kill‑zone timing","Multi‑TF confluence"],
+    "typical_confirmation": "Multiple SMC elements aligning (e.g., OB + FVG + BOS + kill zone).",
+    "ict_entry_technique": "Follow the specific entry technique tied to the confluence (pullback, breakout, sweep, etc.).",
+    "ict_price_action_model": "Integrates all ICT models into a cohesive system.",
+    "common_mistake": "Trying to apply SMC without proper confluence → low‑prob trades.",
+    "related_concepts": ["All ICT concepts listed above"],
+    "chart_example": "Composite example – EUR/USD daily OB 1.0800 + FVG filled → BOS 1.0830 during London kill zone → long."
+  }
+]
