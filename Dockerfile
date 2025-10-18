@@ -1,5 +1,8 @@
-# Use Node.js LTS version
+# Use Node.js 18 LTS
 FROM node:18-alpine
+
+# Install build dependencies
+RUN apk add --no-cache python3 make g++ sqlite-dev
 
 # Set working directory
 WORKDIR /app
@@ -11,18 +14,18 @@ COPY tsconfig.json ./
 # Install dependencies
 RUN npm install
 
-# Copy application source
+# Copy source code
 COPY . .
 
 # Build TypeScript
 RUN npm run build
 
 # Expose port
-EXPOSE 80
+EXPOSE 3000
 
-# Set environment to production
+# Set environment
 ENV NODE_ENV=production
-ENV PORT=80
+ENV PORT=3000
 
 # Start the application
 CMD ["npm", "start"]
